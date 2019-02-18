@@ -19,7 +19,7 @@ function cadastro(request, response, next) {
     })
     .catch( ex => {
         console.error(ex);
-        response.status(412).send('não foi possível incluir o registro')
+        response.status(412).send('Não foi possível incluir o registro')
     })
 }
 
@@ -30,14 +30,14 @@ function buscaPorId(request, response, next) {
     Usuario.findById(usuarioId)
     .then(usuario => {
         if (!usuario){
-            response.status(404).send('usuário não encontrado')
+            response.status(404).send('Usuário não encontrado')
         }else{
             response.status(200).json(usuario)
         }
     })
     .catch(ex=>{
         console.error(ex)
-        response.status(412).send('não foi possível consultar o banco de dados')
+        response.status(412).send('Não foi possível consultar o banco de dados')
     })
 
 }
@@ -49,7 +49,7 @@ function edicao(request, response, next) {
     Usuario.findById(usuarioId)
     .then( usuario => {
         if (!usuario){
-            response.status(404).send('usuário não encontrado')
+            response.status(404).send('Usuário não encontrado')
         }else{
             return usuario.update({
                 nome, email, cpf, nascimento, senha
@@ -61,7 +61,7 @@ function edicao(request, response, next) {
     })
     .catch(ex=>{
         console.error(ex)
-        response.status(412).send('não foi possível consultar o banco de dados')
+        response.status(412).send('Não foi possível consultar o banco de dados')
     })
 }
 
@@ -79,7 +79,7 @@ function login(request, response, next) {
             const token = gerarToken(usuario);
             response.status(200).json({token, usuario});
         } else {
-            response.status(401).send('senha incorreta');
+            response.status(401).send('Senha incorreta');
         }
     })
     .catch(ex=> {
@@ -94,7 +94,7 @@ function usuario(request, response, next){
 
 function logout (request, response, next){
     request.usuarioLogado = null;
-    response.status(200).cookie('token',null).send('usuário deslogado')
+    response.status(200).cookie('token',null).send('Usuário deslogado')
 }
 
 module.exports = {
